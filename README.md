@@ -40,9 +40,9 @@ Speculative decoding helped exactly one of the three — see [the analysis](qwen
 
 ## Hardware used
 
-- **2× Mac Studio M3 Ultra, 128 GB unified memory each**, connected by Thunderbolt 5
-- macOS 26.6, `iogpu.wired_limit_mb=114688` on both machines
-- Models on external NVMe (Thunderbolt 5)
+- **2× Apple M4 Max, 128 GB unified memory each**, connected directly by Thunderbolt
+- macOS 26.6.2, `iogpu.wired_limit_mb=114688` on both machines
+- Models on external NVMe over Thunderbolt
 
 Your numbers will differ. The *relative* effects (patch vs. no patch, speculation vs. none) should hold on comparable hardware.
 

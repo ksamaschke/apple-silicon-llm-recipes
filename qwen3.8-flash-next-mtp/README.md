@@ -38,7 +38,7 @@ Unlike the separate draft models tried with DeepSeek and GLM, the MTP head genui
 
 **Hardware**
 
-- 2× Apple Silicon Mac with 128 GB unified memory (measured on M3 Ultra Mac Studio)
+- 2× Apple Silicon Mac with 128 GB unified memory (measured on M4 Max)
 - Thunderbolt cable directly between the machines
 - ~104 GiB disk for Q4_K_XL plus 23 GiB for the MTP weights
 
@@ -180,7 +180,7 @@ Qwen is roughly 2.5× the DeepSeek configuration — at a *higher* quantization.
 Speculative decoding is a bet: extra compute drafting tokens, repaid only if the drafts are accepted. Same hardware, same harness, three models:
 
 - **Qwen3.8-Flash-Next + MTP head:** acceptance 0.398 → **21% faster**
-- **GLM-5.3-Flash + DFlash2 draft model:** acceptance 0.32 → **14% slower**
+- **GLM-5.3-Flash + DFlash2 draft model:** acceptance 0.177 → **14% slower**
 - **DeepSeek-V4-Flash-Vision + DSpark draft model:** acceptance 0.27–0.46 → **22–32% slower**
 
 Acceptance rate alone does not decide it — Qwen at 0.398 wins while DeepSeek at up to 0.46 loses. What differs is the **cost of drafting**: an MTP head sharing the target model's weights is far cheaper to run than a separate draft model that must be loaded and executed independently. A cheap drafter pays off at a much lower acceptance rate.

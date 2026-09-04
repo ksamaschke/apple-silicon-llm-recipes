@@ -17,9 +17,9 @@
 
 ### Basic idea
 
-DeepSeek-V4-Flash-Vision-Exp at `UD-Q3_K_XL` is 119 GiB. A 128 GB Mac Studio has roughly 112 GiB usable for GPU work after `iogpu.wired_limit_mb`, and the KV cache for a useful context adds tens of GiB on top. The model does not fit.
+DeepSeek-V4-Flash-Vision-Exp at `UD-Q3_K_XL` is 119 GiB. A 128 GB Mac has roughly 112 GiB usable for GPU work after `iogpu.wired_limit_mb`, and the KV cache for a useful context adds tens of GiB on top. The model does not fit.
 
-llama.cpp's RPC backend splits the model's layers across two machines. One Mac runs `llama-server` and holds part of the weights; the other runs `ggml-rpc-server` and holds the rest. Over Thunderbolt 5 with RDMA, the interconnect is fast enough that this is practical rather than merely possible.
+llama.cpp's RPC backend splits the model's layers across two machines. One Mac runs `llama-server` and holds part of the weights; the other runs `ggml-rpc-server` and holds the rest. Over a direct Thunderbolt link with RDMA, the interconnect is fast enough that this is practical rather than merely possible.
 
 This recipe covers the working configuration, the Metal patch that more than doubled throughput, and the settings that turned out to be measured losses.
 
@@ -40,7 +40,7 @@ This recipe covers the working configuration, the Metal patch that more than dou
 
 **Hardware**
 
-- 2× Apple Silicon Mac with 128 GB unified memory (measured on M3 Ultra Mac Studio)
+- 2× Apple Silicon Mac with 128 GB unified memory (measured on M4 Max)
 - **Thunderbolt cable directly between the two machines** — this matters enormously; see [rpc-setup.md](../shared/rpc-setup.md)
 - ~120 GiB free disk on the machine hosting the model files (external NVMe is fine)
 

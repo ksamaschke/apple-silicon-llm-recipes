@@ -43,7 +43,7 @@ This recipe runs it **distributed across two Macs** over Thunderbolt RPC, the sa
 
 **Hardware**
 
-- 2× Apple Silicon Mac with 128 GB unified memory (measured on M3 Ultra Mac Studio)
+- 2× Apple Silicon Mac with 128 GB unified memory (measured on M4 Max)
 - Thunderbolt cable directly between the machines
 - Disk for the GGUF — 112 GiB for IQ3_XXS
 
@@ -170,9 +170,9 @@ Measured on the reference hardware, IQ3_XXS, distributed across two Macs.
 - **1 slot:** 9.19 tok/s — *slower*
 - **4 slots:** 37.88 tok/s aggregate — *slower*
 - **Prompt processing:** 218.8 tok/s best, 104.0 tok/s at 24.8k
-- **Draft acceptance:** 0.32
+- **Draft acceptance:** 0.177 overall
 
-**Do not use DFlash2 speculation with this model.** At 0.32 acceptance the drafting overhead outweighs the savings: 16% lower single-slot throughput, 14% lower aggregate. Break-even needs roughly 0.8.
+**Do not use DFlash2 speculation with this model.** At 0.177 acceptance the drafting overhead outweighs the savings: 16% lower single-slot throughput, 14% lower aggregate. Break-even needs roughly 0.8.
 
 **For comparison** (same hardware, same two-machine topology): DeepSeek-V4-Flash-Vision at Q3_K_XL reaches 33.67 tok/s aggregate at 4 slots. GLM at IQ3_XXS reaches 43.88 — about 30% higher, at a smaller quantization.
 
@@ -207,6 +207,6 @@ With two 128 GB machines, IQ3_XXS through Q4_K_XL are all reachable. The measure
 | `Failed to connect to <ip>:50053` | Worker's single connection consumed | Restart the worker; never probe the port |
 | `send failed bytes_sent=0` | Build mismatch between machines | Rebuild both from the same commit and flags |
 | `Remote RPC server crashed or returned malformed response` | Worker died — check its log | Restart worker; verify both builds match |
-| Slower with DFlash2 than without | Acceptance ~0.32, below break-even | Drop the draft model |
+| Slower with DFlash2 than without | Acceptance 0.177, far below break-even | Drop the draft model |
 | Poor throughput with `--parallel > 1` | `ne21` MoE threshold not patched, or `--cache-ram` not zero | Apply patch 1; set `--cache-ram 0` |
 | Download stalls at zero bytes, process alive | Unauthenticated HF download, `CLOSE_WAIT` | Set `HF_TOKEN` and restart — it resumes |
