@@ -17,9 +17,9 @@ These recipes cover what the llama.cpp docs leave out for Apple Silicon:
 
 ## Available Recipes
 
+> GLM and Qwen recipes are being rewritten from measured configurations and will return shortly.
+
 - **[DeepSeek-V4-Flash-Vision distributed across two Macs](deepseek-v4-distributed/)** — 119 GiB model on 2×128 GB, 33.7 tok/s aggregate at 4 concurrent slots
-- **[GLM-5.3-Flash on a single Mac](glm-5.3-flash/)** — hybrid KDA/MLA architecture, small KV cache, fits 128 GB
-- **[Qwen3.6-27B with MTP speculative decoding](qwen3.6-mtp/)** — where speculative decoding actually pays off
 
 ## Shared references
 
